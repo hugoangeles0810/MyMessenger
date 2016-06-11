@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My Messenger</string>
+    <string name="login.button.singin">Iniciar sesión</string>
+    <string name="login.button.singup">Crear cuenta</string>
+    <string name="login.message.email">Correo electrónico</string>
+    <string name="login.message.password">Password</string>
+    <string name="login.error.message.singin">Imposible iniciar sesión %s</string>
+    <string name="login.error.message.singup">Imposible registrar nuevo usuario %s</string>
+    <string name="login.notice.message.singup">Usuario registrado exitosamente</string>
+</resources>
