@@ -1,4 +1,4 @@
-package com.hugoangeles.android.mymessenger.login;
+package com.hugoangeles.android.mymessenger.login.ui;
 
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -10,13 +10,15 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.hugoangeles.android.mymessenger.R;
-import com.hugoangeles.android.mymessenger.contactlist.ContactListActivity;
+import com.hugoangeles.android.mymessenger.contactlist.ui.ContactListActivity;
+import com.hugoangeles.android.mymessenger.login.LoginPresenter;
+import com.hugoangeles.android.mymessenger.login.LoginPresenterImpl;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginActivity extends AppCompatActivity implements LoginView{
+public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Bind(R.id.txt_login_username)
     EditText inputUsername;
@@ -44,7 +46,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         loginPresenter = new LoginPresenterImpl(this);
+        loginPresenter.onCreate();
         loginPresenter.checkForAuthenticatedUser();
+    }
+
+    @Override
+    protected void onDestroy() {
+        loginPresenter.onDestroy();
+        super.onDestroy();
     }
 
     @Override

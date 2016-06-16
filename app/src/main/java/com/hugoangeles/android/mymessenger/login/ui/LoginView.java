@@ -1,4 +1,4 @@
-package com.hugoangeles.android.mymessenger.login;
+package com.hugoangeles.android.mymessenger.login.ui;
 
 /**
  * Created by Hugo on 10/06/16.

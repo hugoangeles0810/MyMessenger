@@ -7,6 +7,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hugoangeles.android.mymessenger.entities.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -102,7 +103,7 @@ public class FirebaseHelper {
     }
 
     public void singOff() {
-        notifyContactsOfConnectionChange(false, true);
+        notifyContactsOfConnectionChange(User.OFFLINE, true);
     }
 
     private void notifyContactsOfConnectionChange(final boolean online, final boolean signOff) {
@@ -117,7 +118,7 @@ public class FirebaseHelper {
                 }
 
                 if (signOff) {
-                    //FirebaseAuth.getInstance().signOut();
+                    FirebaseAuth.getInstance().signOut();
                 }
             }
 

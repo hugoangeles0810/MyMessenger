@@ -7,4 +7,8 @@
     <string name="login.error.message.singin">Imposible iniciar sesión %s</string>
     <string name="login.error.message.singup">Imposible registrar nuevo usuario %s</string>
     <string name="login.notice.message.singup">Usuario registrado exitosamente</string>
+
+    <string name="contactlist.menu.action.singoff">Cerrar sesión</string>
+    <string name="contactlist.title">Contactos</string>
 </resources>
+
