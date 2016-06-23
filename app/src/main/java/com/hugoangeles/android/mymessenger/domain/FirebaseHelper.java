@@ -51,8 +51,8 @@ public class FirebaseHelper {
 
     public DatabaseReference getUserReference(String email) {
         DatabaseReference userReference = null;
-        if (email != null) {
-            String emailKey = email.replaceAll(".", "_");
+        if (email != null && !email.trim().isEmpty()) {
+            String emailKey = email.replace(".", "_");
             userReference = dataReference.getReference().getRoot().child(emailKey);
         }
 
@@ -72,13 +72,13 @@ public class FirebaseHelper {
     }
 
     public DatabaseReference getOneContactReference(String mainMail, String childMail) {
-        String childKey = childMail.replaceAll(".", "_");
+        String childKey = childMail.replace(".", "_");
         return getUserReference(mainMail).child(CONTACTS_PATH).child(childKey);
     }
 
     public DatabaseReference getChatsReference(String receiver) {
         String keySender = getAuthUserEmail().replace(".", "_");
-        String keyReceiver = receiver.replaceAll(".", "_");
+        String keyReceiver = receiver.replace(".", "_");
 
         String keyChat = keySender + SEPARATOR + keyReceiver;
         if (keySender.compareTo(keyReceiver) > 0) {

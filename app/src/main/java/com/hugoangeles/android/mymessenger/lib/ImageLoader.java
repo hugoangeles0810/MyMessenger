@@ -1,4 +1,4 @@
-package com.hugoangeles.android.mymessenger.contactlist.lib;
+package com.hugoangeles.android.mymessenger.lib;
 
 import android.widget.ImageView;
 

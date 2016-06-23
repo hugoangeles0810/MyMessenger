@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hugoangeles.android.mymessenger.R;
-import com.hugoangeles.android.mymessenger.contactlist.lib.ImageLoader;
+import com.hugoangeles.android.mymessenger.lib.ImageLoader;
 import com.hugoangeles.android.mymessenger.entities.User;
 
 import java.util.List;
@@ -57,6 +57,25 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     @Override
     public int getItemCount() {
         return contactList.size();
+    }
+
+    public void add(User user) {
+        if (!contactList.contains(user)) {
+            contactList.add(user);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void update(User user) {
+        if (contactList.contains(user)) {
+            contactList.set(contactList.indexOf(user), user);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void remove(User user) {
+        contactList.remove(user);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
