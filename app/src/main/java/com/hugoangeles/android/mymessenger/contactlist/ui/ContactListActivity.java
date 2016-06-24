@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.hugoangeles.android.mymessenger.R;
 import com.hugoangeles.android.mymessenger.addcontact.ui.AddContactFragment;
+import com.hugoangeles.android.mymessenger.chat.ui.ChatActivity;
 import com.hugoangeles.android.mymessenger.contactlist.ContactListPresenter;
 import com.hugoangeles.android.mymessenger.contactlist.ContactListPresenterImpl;
 import com.hugoangeles.android.mymessenger.contactlist.adapters.ContactListAdapter;
@@ -128,7 +129,10 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
 
     @Override
     public void onItemClick(User user) {
-        Toast.makeText(this, user.getEmail(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.putExtra(ChatActivity.EMAIL_KEY, user.getEmail());
+        intent.putExtra(ChatActivity.ONLINE_KEY, user.isOnline());
+        startActivity(intent);
     }
 
     @Override
