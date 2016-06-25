@@ -53,7 +53,7 @@ public class FirebaseHelper {
         DatabaseReference userReference = null;
         if (email != null && !email.trim().isEmpty()) {
             String emailKey = email.replace(".", "_");
-            userReference = dataReference.getReference().getRoot().child(emailKey);
+            userReference = dataReference.getReference().getRoot().child(USERS_PATH).child(emailKey);
         }
 
         return userReference;

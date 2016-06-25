@@ -1,5 +1,8 @@
 package com.hugoangeles.android.mymessenger.contactlist;
 
+import android.util.Log;
+
+import com.hugoangeles.android.mymessenger.MyMessengerApp;
 import com.hugoangeles.android.mymessenger.contactlist.events.ContactListEvent;
 import com.hugoangeles.android.mymessenger.contactlist.ui.ContactListView;
 import com.hugoangeles.android.mymessenger.entities.User;
@@ -12,6 +15,8 @@ import org.greenrobot.eventbus.Subscribe;
  * Created by hugo on 22/06/16.
  */
 public class ContactListPresenterImpl implements ContactListPresenter {
+
+    public static final String TAG = ContactListPresenterImpl.class.getSimpleName();
 
     private EventBus eventBus;
     private ContactListView view;
@@ -39,14 +44,23 @@ public class ContactListPresenterImpl implements ContactListPresenter {
 
     @Override
     public void onPause() {
-        sessionInteractor.changeConnectionStatus(User.OFFLINE);
-        listInteractor.unsubscribe();
+        try {
+            sessionInteractor.changeConnectionStatus(User.OFFLINE);
+            listInteractor.unsubscribe();
+        } catch (NullPointerException e) {
+            Log.e(TAG, "Handle Null Pointer on Logout", e);
+        }
     }
 
     @Override
     public void onResume() {
-        listInteractor.subscribe();
-        sessionInteractor.changeConnectionStatus(User.ONLINE);
+        try {
+            listInteractor.subscribe();
+            sessionInteractor.changeConnectionStatus(User.ONLINE);
+        } catch (NullPointerException e) {
+            Log.e(TAG, "Handle Null Pointer on Logout", e);
+        }
+
     }
 
     @Override

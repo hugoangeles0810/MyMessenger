@@ -3,6 +3,8 @@ package com.hugoangeles.android.mymessenger.contactlist;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.hugoangeles.android.mymessenger.MyMessengerApp;
 import com.hugoangeles.android.mymessenger.contactlist.events.ContactListEvent;
 import com.hugoangeles.android.mymessenger.domain.FirebaseHelper;
 import com.hugoangeles.android.mymessenger.entities.User;
@@ -65,7 +67,11 @@ public class ContactListRepositoryImpl implements ContactListRepository {
             };
         }
 
-        firebase.getMyContactsReference().addChildEventListener(contactEvenListener);
+        DatabaseReference myContactsReference = firebase.getMyContactsReference();
+        if (myContactsReference != null) {
+            myContactsReference.addChildEventListener(contactEvenListener);
+        }
+
     }
 
     private void handleContact(DataSnapshot dataSnapshot, int eventType) {

@@ -51,7 +51,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         int gravity = Gravity.LEFT;
 
         if (!message.isSentByMe()) {
-            color = fetchColor(R.attr.colorPrimaryDark);
+            color = fetchColor(R.attr.colorAccent);
             gravity = Gravity.RIGHT;
         }
 
