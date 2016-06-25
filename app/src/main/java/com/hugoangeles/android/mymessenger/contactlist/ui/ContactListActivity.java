@@ -64,11 +64,6 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_logout) {
             presenter.signOff();
-            Intent intent = new Intent(this, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                    Intent.FLAG_ACTIVITY_NEW_TASK |
-                    Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -125,6 +120,15 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
     @Override
     public void onContactRemoved(User user) {
         adapter.remove(user);
+    }
+
+    @Override
+    public void onUserLogout() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     @Override

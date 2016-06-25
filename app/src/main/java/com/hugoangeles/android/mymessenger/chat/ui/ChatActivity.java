@@ -15,6 +15,7 @@ import com.hugoangeles.android.mymessenger.R;
 import com.hugoangeles.android.mymessenger.chat.ChatPresenter;
 import com.hugoangeles.android.mymessenger.chat.ChatPresenterImpl;
 import com.hugoangeles.android.mymessenger.chat.adapters.ChatAdapter;
+import com.hugoangeles.android.mymessenger.domain.AvatarHelper;
 import com.hugoangeles.android.mymessenger.entities.ChatMessage;
 import com.hugoangeles.android.mymessenger.lib.GlideImageLoader;
 import com.hugoangeles.android.mymessenger.lib.ImageLoader;
@@ -78,7 +79,7 @@ public class ChatActivity extends AppCompatActivity implements ChatView {
         txtStatus.setTextColor(color);
 
         ImageLoader imageLoader = new GlideImageLoader(this);
-        imageLoader.load(imgAvatar, "");
+        imageLoader.load(imgAvatar, AvatarHelper.getAvatarUrl(recipient));
 
         setSupportActionBar(toolbar);
     }
@@ -89,19 +90,7 @@ public class ChatActivity extends AppCompatActivity implements ChatView {
     }
 
     private void setupAdapter() {
-        ChatMessage msg1 =  new ChatMessage();
-        ChatMessage msg2 =  new ChatMessage();
-
-        msg1.setMessage("Hola!!");
-        msg1.setSentByMe(true);
-
-        msg2.setMessage("Hola!!");
-        msg2.setSentByMe(false);
-
         List<ChatMessage> msgs = new ArrayList<>();
-        msgs.add(msg1);
-        msgs.add(msg2);
-
         adapter =  new ChatAdapter(this, msgs);
     }
 

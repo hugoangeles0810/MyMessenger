@@ -93,7 +93,15 @@ public class ContactListPresenterImpl implements ContactListPresenter {
                 break;
             case ContactListEvent.onContactRemoved:
                 onContactRemoved(event.getUser());
+            case ContactListEvent.onUserLogout:
+                onUserLogout();
                 break;
+        }
+    }
+
+    private void onUserLogout() {
+        if (view != null) {
+            view.onUserLogout();
         }
     }
 

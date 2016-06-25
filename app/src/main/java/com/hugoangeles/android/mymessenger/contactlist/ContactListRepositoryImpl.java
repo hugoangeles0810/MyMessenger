@@ -1,5 +1,8 @@
 package com.hugoangeles.android.mymessenger.contactlist;
 
+import android.support.annotation.NonNull;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,6 +22,7 @@ public class ContactListRepositoryImpl implements ContactListRepository {
     private FirebaseHelper firebase;
     private ChildEventListener contactEvenListener;
     private EventBus eventBus;
+    private FirebaseAuth.AuthStateListener authStateListener;
 
     public ContactListRepositoryImpl() {
         this.firebase = FirebaseHelper.getInstance();
@@ -27,6 +31,17 @@ public class ContactListRepositoryImpl implements ContactListRepository {
 
     @Override
     public void signOff() {
+        if (authStateListener == null) {
+            authStateListener = new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    if (firebaseAuth.getCurrentUser() == null) { //is logout
+                        post(ContactListEvent.onUserLogout, null);
+                    }
+                }
+            };
+        }
+        FirebaseAuth.getInstance().addAuthStateListener(authStateListener);
         firebase.singOff();
     }
 
@@ -90,11 +105,16 @@ public class ContactListRepositoryImpl implements ContactListRepository {
         if (contactEvenListener != null) {
             firebase.getMyContactsReference().removeEventListener(contactEvenListener);
         }
+
+        if (authStateListener != null) {
+            FirebaseAuth.getInstance().removeAuthStateListener(authStateListener);
+        }
     }
 
     @Override
     public void destroyListener() {
         contactEvenListener = null;
+        authStateListener = null;
     }
 
     @Override

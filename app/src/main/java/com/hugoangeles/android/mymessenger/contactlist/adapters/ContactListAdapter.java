@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hugoangeles.android.mymessenger.R;
+import com.hugoangeles.android.mymessenger.domain.AvatarHelper;
 import com.hugoangeles.android.mymessenger.lib.ImageLoader;
 import com.hugoangeles.android.mymessenger.entities.User;
 
@@ -51,7 +52,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         holder.txtContactState.setText(status);
         holder.txtContactState.setTextColor(color);
 
-        imageLoader.load(holder.imgContactAvatar, "");
+        imageLoader.load(holder.imgContactAvatar, AvatarHelper.getAvatarUrl(email));
     }
 
     @Override
